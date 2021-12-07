@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "618775203284",
+    "project_id": "udemi-chatapp",
+    "storage_bucket": "udemi-chatapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618775203284:android:a6fdef6573640e2ac0da41",
+        "android_client_info": {
+          "package_name": "com.andrewyanovich.udemichatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "618775203284-gotebjg5vnojgfi1nfqqsepl8l8c4t0s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARkpK7xUzF9gDiQfByVo8mqd7yfG22cwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "618775203284-gotebjg5vnojgfi1nfqqsepl8l8c4t0s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
