@@ -18,7 +18,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Chat',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        backgroundColor: Colors.pink,
+        primaryColor:  Colors.pink,
+        accentColor: Colors.deepPurple,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          ),
+        ),
       ),
       home: AuthScreen(),
     );
