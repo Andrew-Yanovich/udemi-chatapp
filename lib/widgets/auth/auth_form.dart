@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
-  const AuthForm({Key? key}) : super(key: key);
+  final void Function(
+    String email,
+    String password,
+    String userName,
+    bool isLogin,
+      BuildContext ctx,
+  ) submitFn;
+
+  const AuthForm({Key? key, required this.submitFn}) : super(key: key);
 
   @override
   _AuthFormState createState() => _AuthFormState();
@@ -14,15 +22,19 @@ class _AuthFormState extends State<AuthForm> {
   var _userName = '';
   var _userPassword = '';
 
-  void _trySubmit(){
+  void _trySubmit() {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
 
-    if(isValid){
+    if (isValid) {
       _formKey.currentState!.save();
-      print(_userEmail);
-      print(_userName);
-      print(_userPassword);
+      widget.submitFn(
+        _userEmail.trim(),
+        _userPassword.trim(),
+        _userName.trim(),
+        _isLogin,
+        context,
+      );
     }
   }
 
@@ -41,8 +53,10 @@ class _AuthFormState extends State<AuthForm> {
                 children: [
                   TextFormField(
                     key: const ValueKey('email'),
-                    validator: (value){
-                      if(value == null || value.isEmpty || !value.contains('@')){
+                    validator: (value) {
+                      if (value == null ||
+                          value.isEmpty ||
+                          !value.contains('@')) {
                         return 'Please enter a valid email address.';
                       }
                       return null;
@@ -54,24 +68,26 @@ class _AuthFormState extends State<AuthForm> {
                       _userEmail = value!;
                     },
                   ),
-                  if(!_isLogin)
-                  TextFormField(
-                    key: const ValueKey('username'),
-                    validator: (value){
-                      if(value == null || value.isEmpty || value.length < 4){
-                        return 'Please enter at least 4 characters.';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(labelText: 'Username'),
-                    onSaved: (value) {
-                      _userName = value!;
-                    },
-                  ),
+                  if (!_isLogin)
+                    TextFormField(
+                      key: const ValueKey('username'),
+                      validator: (value) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            value.length < 4) {
+                          return 'Please enter at least 4 characters.';
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(labelText: 'Username'),
+                      onSaved: (value) {
+                        _userName = value!;
+                      },
+                    ),
                   TextFormField(
                     key: const ValueKey('password'),
-                    validator: (value){
-                      if(value == null || value.isEmpty || value.length < 7){
+                    validator: (value) {
+                      if (value == null || value.isEmpty || value.length < 7) {
                         return 'Password must be at least 7 characters long';
                       }
                       return null;
@@ -88,7 +104,9 @@ class _AuthFormState extends State<AuthForm> {
                     onPressed: _trySubmit,
                   ),
                   TextButton(
-                    child: Text(_isLogin ? 'Create new account' : 'I already have an account'),
+                    child: Text(_isLogin
+                        ? 'Create new account'
+                        : 'I already have an account'),
                     onPressed: () {
                       setState(() {
                         _isLogin = !_isLogin;
