@@ -19,10 +19,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Chat',
       theme: ThemeData(
         backgroundColor: Colors.pink,
-        primaryColor:  Colors.pink,
+        primaryColor: Colors.pink,
         accentColor: Colors.deepPurple,
+
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
+            primary: Colors.pink,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           ),
