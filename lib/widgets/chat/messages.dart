@@ -10,8 +10,8 @@ class Messages extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder<User>(
       future: Future.value(FirebaseAuth.instance.currentUser),
-      builder: (ctx, futureSnapshot) {
-        if(futureSnapshot.connectionState == ConnectionState.waiting){
+      builder: (ctx, userSnapshot) {
+        if(userSnapshot.connectionState == ConnectionState.waiting){
           return const Center(child: CircularProgressIndicator(),);
         }
         return StreamBuilder<QuerySnapshot>(
@@ -31,7 +31,9 @@ class Messages extends StatelessWidget {
               itemCount: snapshotData.size,
               itemBuilder: (ctx, index) => MessageBubble(
                 message: snapshotData.docs[index]['text'],
-                isMe: snapshotData.docs[index]['userId'] == futureSnapshot.data!.uid,
+                userName: snapshotData.docs[index]['userName'],
+                userId: snapshotData.docs[index]['userId'],
+                isMe: snapshotData.docs[index]['userId'] == userSnapshot.data!.uid,
                 key: ValueKey(snapshotData.docs[index].id),
               ),
             );
