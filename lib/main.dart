@@ -21,15 +21,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         backgroundColor: Colors.pink,
         primaryColor: Colors.pink,
-        accentColor: Colors.deepPurple,
-
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            primary: Colors.pink,
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          ),
+        ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             primary: Colors.pink,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           ),
-        ),
+        ), 
+        
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.deepPurple),
       ),
       home: StreamBuilder(stream: FirebaseAuth.instance.authStateChanges(), builder: (ctx, userSnapshot){
         if(userSnapshot.hasData){

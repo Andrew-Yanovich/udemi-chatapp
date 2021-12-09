@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:chatapp/widgets/pickers/user_image_picker.dart';
 
 class AuthForm extends StatefulWidget {
-
   final bool isLoading;
 
   final void Function(
@@ -9,7 +9,7 @@ class AuthForm extends StatefulWidget {
     String password,
     String userName,
     bool isLogin,
-      BuildContext ctx,
+    BuildContext ctx,
   ) submitFn;
 
   const AuthForm({Key? key, required this.submitFn, required this.isLoading}) : super(key: key);
@@ -54,19 +54,17 @@ class _AuthFormState extends State<AuthForm> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  if(!_isLogin) UserImagePicker(),
                   TextFormField(
                     key: const ValueKey('email'),
                     validator: (value) {
-                      if (value == null ||
-                          value.isEmpty ||
-                          !value.contains('@')) {
+                      if (value == null || value.isEmpty || !value.contains('@')) {
                         return 'Please enter a valid email address.';
                       }
                       return null;
                     },
                     keyboardType: TextInputType.emailAddress,
-                    decoration:
-                        const InputDecoration(labelText: 'Email Address'),
+                    decoration: const InputDecoration(labelText: 'Email Address'),
                     onSaved: (value) {
                       _userEmail = value!;
                     },
@@ -75,9 +73,7 @@ class _AuthFormState extends State<AuthForm> {
                     TextFormField(
                       key: const ValueKey('username'),
                       validator: (value) {
-                        if (value == null ||
-                            value.isEmpty ||
-                            value.length < 4) {
+                        if (value == null || value.isEmpty || value.length < 4) {
                           return 'Please enter at least 4 characters.';
                         }
                         return null;
@@ -102,18 +98,15 @@ class _AuthFormState extends State<AuthForm> {
                     },
                   ),
                   const SizedBox(height: 12),
-                  if(widget.isLoading)
-                    const CircularProgressIndicator(),
-                  if(!widget.isLoading)
+                  if (widget.isLoading) const CircularProgressIndicator(),
+                  if (!widget.isLoading)
                     ElevatedButton(
                       child: Text(_isLogin ? 'Login' : 'Signup'),
                       onPressed: _trySubmit,
                     ),
-                  if(!widget.isLoading)
+                  if (!widget.isLoading)
                     TextButton(
-                      child: Text(_isLogin
-                          ? 'Create new account'
-                          : 'I already have an account'),
+                      child: Text(_isLogin ? 'Create new account' : 'I already have an account'),
                       onPressed: () {
                         setState(() {
                           _isLogin = !_isLogin;
