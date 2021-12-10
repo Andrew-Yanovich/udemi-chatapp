@@ -75,6 +75,9 @@ class _AuthFormState extends State<AuthForm> {
                 children: [
                   if (!_isLogin) UserImagePicker(imagePickFn: _pickedImage,),
                   TextFormField(
+                    autocorrect: false,
+                    textCapitalization: TextCapitalization.none,
+                    enableSuggestions: false,
                     key: const ValueKey('email'),
                     validator: (value) {
                       if (value == null || value.isEmpty || !value.contains('@')) {
@@ -90,6 +93,9 @@ class _AuthFormState extends State<AuthForm> {
                   ),
                   if (!_isLogin)
                     TextFormField(
+                      autocorrect: true,
+                      textCapitalization: TextCapitalization.words,
+                      enableSuggestions: false,
                       key: const ValueKey('username'),
                       validator: (value) {
                         if (value == null || value.isEmpty || value.length < 4) {
