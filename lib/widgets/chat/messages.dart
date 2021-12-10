@@ -32,6 +32,7 @@ class Messages extends StatelessWidget {
               itemBuilder: (ctx, index) => MessageBubble(
                 message: snapshotData.docs[index]['text'],
                 userName: snapshotData.docs[index]['userName'],
+                userImage: snapshotData.docs[index]['userImage'],
                 userId: snapshotData.docs[index]['userId'],
                 isMe: snapshotData.docs[index]['userId'] == userSnapshot.data!.uid,
                 key: ValueKey(snapshotData.docs[index].id),
